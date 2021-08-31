@@ -8,6 +8,6 @@ This is used for backend processes of the calculator exam written in c#.
 
 # Note
 
-This service implements a swagger documention.
-All endpoint can be tested via swagger.
+- This service implements a swagger documention.
+- All endpoint can be tested via swagger.
 Swagger local address - https://localhost:44327/swagger/index.html
