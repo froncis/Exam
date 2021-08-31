@@ -13,6 +13,6 @@ This is used for backend processes of the calculator exam written in c#.
  To run this service
  1. Use the Exam.Api project as the Start up project.
  2. This will automatically open the default local address https://localhost:44327
- 3. Then add /swagger to go to swagger page.
+ 3. Then add /swagger/index.html to go to swagger page.
 
 Swagger local address - https://localhost:44327/swagger/index.html
