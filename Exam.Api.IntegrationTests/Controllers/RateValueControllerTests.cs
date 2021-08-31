@@ -1,8 +1,10 @@
 ﻿using Exam.Api.IntegrationTests.Base;
+using Exam.Application.Services.RateValue.Command.CreateRateValue;
 using Exam.Application.Services.RateValue.Queries.GetRateValueDetails;
 using Exam.Application.Services.RateValue.Queries.GetRateValueList;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -49,6 +51,28 @@ namespace Exam.Api.IntegrationTests.Controllers
 
             Assert.IsType<RateValueDetailsViewModel>(result);
             Assert.NotNull(result);
+        }
+
+        [Fact]
+        public async Task CreateNewRateValue()
+        {
+            var client = _factory.GetAnonymousClient();
+
+            CreateRateValueCommand command = new CreateRateValueCommand();
+            command.IncrementalRate = 10;
+            command.MaturityYear = 4;
+            command.UpperBoundInterestRate = 50;
+
+            StringContent httpContent = new StringContent(JsonConvert.SerializeObject(command), System.Text.Encoding.UTF8, "application/json");
+
+
+            var response = await client.PostAsync("/api/RateValue" , httpContent);
+
+            response.EnsureSuccessStatusCode();
+
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            Assert.True(response.IsSuccessStatusCode);
         }
     }
 }

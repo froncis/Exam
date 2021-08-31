@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Exam.Application.Common.Interfaces;
 using Exam.Application.Profiles;
+using Exam.Application.Services.CalculatorValue.Commands.CreateListCalculatorValue;
 using Exam.Application.UnitTests.Mocks;
 using Exam.Domain.Entities;
 using Moq;
@@ -29,20 +30,21 @@ namespace Exam.Application.UnitTests.CalculatorValue.Commands
             _mapper = configurationProvider.CreateMapper();
         }
 
-        //[Fact]
-        //public async Task Handle_ValidValues_AddedToCalculatorRepo()
-        //{
-        //    var handler = new CreateCalculatorValueCommandHandler(_mapper, _mockCalculatorValuesRepository.Object);
+        [Fact]
+        public async Task Handle_ValidValues_AddedToCalculatorRepo()
+        {
+            var handler = new CalculatedInterestValueCommandHandler(_mockCalculatorValuesRepository.Object, _mapper);
 
-        //    await handler.Handle(new CreateCalculatorValueCommand()
-        //    {
-        //        PresentValue = 2145,
-        //        FutureValue = 3217.5M,
-        //        LowerBoundInterestRate = 0.5F,
-        //    }, CancellationToken.None);
+            await handler.Handle(new CalculatedInterestValueCommand()
+            {
+                PresentValue = 2145,
+                FutureValue = 3217.5M,
+                LowerBoundInterestRate = 0.5F,
+                Year = 1
+            }, CancellationToken.None);
 
-        //    var allCalculatedValues = await _mockCalculatorValuesRepository.Object.ListAllAsync();
-        //    allCalculatedValues.Count.ShouldBe(5);
-        //}
+            var allCalculatedValues = await _mockCalculatorValuesRepository.Object.ListAllAsync();
+            allCalculatedValues.Count.ShouldBe(5);
+        }
     }
 }
