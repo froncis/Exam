@@ -1,4 +1,4 @@
-# Exam
+# Calculator Exam
 
 This is used for backend processes of the calculator exam written in c#.
 
